@@ -8,19 +8,20 @@ local gameLevel1 = Gamestate.new()
 
 local Player = require 'entities.player'
 local Ground = require 'entities.ground'
+local Particle = require 'entities.particle'
 
-player = nil
+particles = {}
 world = nil
 
 function gameLevel1:enter()
     world = bump.newWorld(16)
 
     Entities:enter()
-    player = Player(world, 16, 16)
-    ground_0 = Ground(world, 120, 360, 640, 16)
-    ground_1 = Ground(world, 0, 448, 640, 16)
+    for i=1,1000 do
+        table.insert(particles, Particle(world, 250, 250, 3, 3, 5))
+    end
 
-    Entities:addMany({player, ground_0, ground_1})
+    Entities:addMany(particles)
 end
 
 function gameLevel1:update(dt)
